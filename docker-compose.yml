@@ -27,16 +27,17 @@ services:
     networks:
       - sampo_bot_network
 
-  debian_dev:
-    container_name: debian_dev
-    image: debian:latest
-    # network_mode: redis_sampo
-    restart: always
-    tty: true
-    stdin_open: true
-    command: bash
-    networks:
-      - sampo_bot_network
+  # Debian container for testing
+  # debian_dev:
+  #   container_name: debian_dev
+  #   image: debian:latest
+  #   # network_mode: redis_sampo
+  #   restart: always
+  #   tty: true
+  #   stdin_open: true
+  #   command: bash
+  #   networks:
+  #     - sampo_bot_network
   
 networks:
   sampo_bot_network:
