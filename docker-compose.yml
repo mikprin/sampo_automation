@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  dance_sampo_bot_app:
+    container_name: dance_sampo_bot_app
+    # restart: always
+    # network_mode: redis_sampo
+    build: .
+    networks:
+      - sampo_bot_network
+    depends_on:
+      - redis_sampo
+
+  redis_sampo:
+    container_name: redis_sampo
+    image: redis
+    restart: always
+    # Persistent storage
+    volumes:
+      - ./redis_data:/data
+      - ./redis_config/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf --save 60 1 #--loglevel warning
+    ports:
+      - "16379:16379"
+      - "6379:6379"
+    environment:
+    - REDIS_MAXMEMORY=1024mb # Limit Redis memory usage to 1024mb
+    networks:
+      - sampo_bot_network
+
+  debian_dev:
+    container_name: debian_dev
+    image: debian:latest
+    # network_mode: redis_sampo
+    restart: always
+    tty: true
+    stdin_open: true
+    command: bash
+    networks:
+      - sampo_bot_network
+  
+networks:
+  sampo_bot_network:
