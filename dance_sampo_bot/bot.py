@@ -56,10 +56,9 @@ redis_connection.mset({"Croatia": "Zagreb", "Bahamas": "Nassau"})
 print(redis_connection.get("Bahamas"))
 
 # Telegram bot
-# telegram_token = os.getenv("TELEGRAM_API_KEY")
+telegram_token = os.getenv("TELEGRAM_API_KEY")
 
-# bot = telebot.TeleBot(telegram_token, parse_mode=None) # You can set parse_mode by default. HTML or MARKDOWN
-
+bot = telebot.TeleBot(telegram_token, parse_mode=None) # You can set parse_mode by default. HTML or MARKDOWN
 
 
 
